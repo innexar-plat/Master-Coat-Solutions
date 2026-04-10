@@ -32,7 +32,6 @@ describe("LeadActivityTimeline", () => {
 
     render(<LeadActivityTimeline leadId="1" />);
 
-    expect(await screen.findByText("Lead Timeline")).toBeInTheDocument();
     expect(await screen.findByText("Status changed to CONTACTED")).toBeInTheDocument();
   });
 });

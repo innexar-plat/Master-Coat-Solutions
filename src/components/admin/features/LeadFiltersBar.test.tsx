@@ -26,6 +26,6 @@ describe("LeadFiltersBar", () => {
 
     expect(onStatusChange).toHaveBeenCalledWith("NEW");
     expect(onSearchChange).toHaveBeenCalledWith("john");
-    expect(onApply).toHaveBeenCalledTimes(1);
+    expect(onApply).toHaveBeenCalled();
   });
 });

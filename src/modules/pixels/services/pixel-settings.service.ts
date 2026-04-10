@@ -54,16 +54,21 @@ async function ensurePixelSettingsRow() {
 }
 
 export async function readPixelSettings(): Promise<PixelSettings> {
-  const row = await ensurePixelSettingsRow();
+  try {
+    const row = await ensurePixelSettingsRow();
 
-  return toDomainPixelSettings({
-    enabled: row.enabled,
-    ga4MeasurementId: row.ga4MeasurementId,
-    gtmId: row.gtmId,
-    metaPixelId: row.metaPixelId,
-    googleAdsId: row.googleAdsId,
-    tiktokPixelId: row.tiktokPixelId
-  });
+    return toDomainPixelSettings({
+      enabled: row.enabled,
+      ga4MeasurementId: row.ga4MeasurementId,
+      gtmId: row.gtmId,
+      metaPixelId: row.metaPixelId,
+      googleAdsId: row.googleAdsId,
+      tiktokPixelId: row.tiktokPixelId
+    });
+  } catch {
+    const legacy = await readLegacyPixelSettingsFile();
+    return toDomainPixelSettings(legacy ?? DEFAULT_PIXEL_SETTINGS);
+  }
 }
 
 export async function updatePixelSettings(input: UpdatePixelSettingsInput): Promise<PixelSettings> {

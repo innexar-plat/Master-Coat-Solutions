@@ -13,6 +13,7 @@ export function LeadNotesPanel({ leadId }: LeadNotesPanelProps) {
   const [notes, setNotes] = useState<LeadNoteRecord[]>([]);
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     async function loadNotes() {
@@ -39,65 +40,80 @@ export function LeadNotesPanel({ leadId }: LeadNotesPanelProps) {
   }, [leadId]);
 
   async function handleCreateNote() {
-    if (!leadId || text.trim().length < 2) {
+    if (!leadId || text.trim().length < 2 || saving) {
       return;
     }
 
-    const response = await fetch(`/api/admin/leads/${leadId}/notes`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ note: text })
-    });
+    setSaving(true);
+    try {
+      const response = await fetch(`/api/admin/leads/${leadId}/notes`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ note: text })
+      });
 
-    if (!response.ok) {
-      return;
+      if (!response.ok) {
+        return;
+      }
+
+      const json = (await response.json()) as { data: LeadNoteRecord };
+      setNotes((current) => [json.data, ...current]);
+      setText("");
+    } finally {
+      setSaving(false);
     }
+  }
 
-    const json = (await response.json()) as { data: LeadNoteRecord };
-    setNotes((current) => [json.data, ...current]);
-    setText("");
+  function handleKeyDown(event: React.KeyboardEvent) {
+    if (event.key === "Enter" && (event.ctrlKey || event.metaKey)) {
+      handleCreateNote();
+    }
+  }
+
+  if (!leadId) {
+    return <p className="text-sm text-slate-400">{t("notes.selectLead")}</p>;
   }
 
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm md:p-6">
-      <h2 className="text-xl font-black tracking-tight text-slate-900">{t("notes.title")}</h2>
-      {!leadId ? <p className="mt-3 text-sm text-slate-600">{t("notes.selectLead")}</p> : null}
+    <div className="grid gap-3">
+      <div className="relative">
+        <textarea
+          value={text}
+          onChange={(event) => setText(event.target.value)}
+          onKeyDown={handleKeyDown}
+          rows={3}
+          className="w-full resize-none rounded-lg border border-slate-200 px-3 py-2 text-sm placeholder:text-slate-300 focus:border-slate-400 focus:outline-none focus:ring-1 focus:ring-slate-400"
+          placeholder={t("notes.placeholder")}
+        />
+        <button
+          type="button"
+          onClick={handleCreateNote}
+          disabled={text.trim().length < 2 || saving}
+          className="absolute bottom-2.5 right-2.5 rounded-md bg-slate-900 px-3 py-1 text-[11px] font-semibold text-white transition hover:bg-slate-700 disabled:opacity-40 disabled:cursor-not-allowed"
+        >
+          {saving ? "..." : t("notes.add")}
+        </button>
+      </div>
 
-      {leadId ? (
-        <div className="mt-4 grid gap-3">
-          <textarea
-            value={text}
-            onChange={(event) => setText(event.target.value)}
-            className="min-h-20 rounded-xl border border-slate-300 px-3 py-2 text-sm"
-            placeholder={t("notes.placeholder")}
-          />
-          <button
-            type="button"
-            onClick={handleCreateNote}
-            className="w-fit rounded-xl bg-slate-900 px-4 py-2 text-xs font-semibold text-white transition hover:bg-slate-700"
-          >
-            {t("notes.add")}
-          </button>
-        </div>
-      ) : null}
-
-      {loading ? <p className="mt-4 text-sm text-slate-600">{t("notes.loading")}</p> : null}
-
-      {leadId && !loading ? (
-        <ul className="mt-4 grid gap-2">
+      {loading ? (
+        <p className="text-xs text-slate-400">{t("notes.loading")}</p>
+      ) : (
+        <div className="max-h-[320px] space-y-2 overflow-y-auto">
           {notes.map((note) => (
-            <li key={note.id} className="rounded-xl bg-slate-50 px-3 py-2 text-sm text-slate-800">
-              <p>{note.note}</p>
-              <p className="mt-1 text-xs text-slate-500">
+            <div key={note.id} className="rounded-lg bg-slate-50 px-3 py-2">
+              <p className="text-sm text-slate-800">{note.note}</p>
+              <p className="mt-1 text-[11px] text-slate-400">
                 {new Date(note.createdAt).toLocaleString()} · {note.createdBy}
               </p>
-            </li>
+            </div>
           ))}
-          {notes.length === 0 ? <li className="text-sm text-slate-600">{t("notes.empty")}</li> : null}
-        </ul>
-      ) : null}
-    </section>
+          {notes.length === 0 ? (
+            <p className="py-4 text-center text-xs text-slate-400">{t("notes.empty")}</p>
+          ) : null}
+        </div>
+      )}
+    </div>
   );
 }

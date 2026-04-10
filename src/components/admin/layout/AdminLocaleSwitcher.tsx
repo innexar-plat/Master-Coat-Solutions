@@ -30,7 +30,7 @@ export function AdminLocaleSwitcher() {
   }
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1">
       {ADMIN_LOCALES.map((entry) => {
         const active = entry === locale;
 
@@ -40,8 +40,8 @@ export function AdminLocaleSwitcher() {
             type="button"
             onClick={() => changeLocale(entry)}
             disabled={loadingLocale === entry}
-            className={`rounded-full px-3 py-2 text-xs font-semibold transition ${
-              active ? "bg-slate-900 text-white" : "border border-slate-300 bg-white text-slate-700 hover:bg-slate-100"
+            className={`rounded-md px-2 py-1 text-[11px] font-semibold transition ${
+              active ? "bg-slate-900 text-white" : "text-slate-500 hover:bg-slate-100 hover:text-slate-700"
             }`}
             aria-label={t(`locale.${entry}`)}
           >

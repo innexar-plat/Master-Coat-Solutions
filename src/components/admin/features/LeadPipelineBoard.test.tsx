@@ -21,7 +21,7 @@ describe("LeadPipelineBoard", () => {
       />
     );
 
-    expect(screen.getByText("Pipeline")).toBeInTheDocument();
     expect(screen.getByText("New")).toBeInTheDocument();
+    expect(screen.getByText("1")).toBeInTheDocument();
   });
 });

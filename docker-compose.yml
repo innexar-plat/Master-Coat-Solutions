@@ -21,6 +21,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        DATABASE_URL: ${DATABASE_URL:-postgresql://vini_admin:vini_secret@postgres:5432/vini_painting?schema=public}
     container_name: vini-painting-app
     restart: unless-stopped
     depends_on:

@@ -32,6 +32,8 @@ export function LeadFollowUpPanel({ leadId }: LeadFollowUpPanelProps) {
   const [inputValue, setInputValue] = useState("");
   const [record, setRecord] = useState<LeadFollowUpRecord | null>(null);
   const [loading, setLoading] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
 
   useEffect(() => {
     async function load() {
@@ -61,68 +63,95 @@ export function LeadFollowUpPanel({ leadId }: LeadFollowUpPanelProps) {
   }, [leadId]);
 
   async function saveFollowUp(followUpAt: string | null) {
-    if (!leadId) {
+    if (!leadId || saving) {
       return;
     }
 
-    const response = await fetch(`/api/admin/leads/${leadId}/follow-up`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ followUpAt })
-    });
+    setSaving(true);
+    setSaved(false);
+    try {
+      const response = await fetch(`/api/admin/leads/${leadId}/follow-up`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ followUpAt })
+      });
 
-    if (!response.ok) {
-      return;
+      if (!response.ok) {
+        return;
+      }
+
+      const json = (await response.json()) as { data: LeadFollowUpRecord };
+      setRecord(json.data);
+      setInputValue(toInputValue(json.data.followUpAt));
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2000);
+    } finally {
+      setSaving(false);
     }
-
-    const json = (await response.json()) as { data: LeadFollowUpRecord };
-    setRecord(json.data);
-    setInputValue(toInputValue(json.data.followUpAt));
   }
 
   const formatted = useMemo(() => {
     if (!record?.followUpAt) {
-      return t("followUp.empty");
+      return null;
     }
 
     return new Date(record.followUpAt).toLocaleString();
-  }, [record, t]);
+  }, [record]);
+
+  if (!leadId) {
+    return <p className="text-sm text-slate-400">{t("followUp.selectLead")}</p>;
+  }
+
+  if (loading) {
+    return <p className="text-xs text-slate-400">{t("followUp.loading")}</p>;
+  }
 
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm md:p-6">
-      <h2 className="text-xl font-black tracking-tight text-slate-900">{t("followUp.title")}</h2>
-      {!leadId ? <p className="mt-3 text-sm text-slate-600">{t("followUp.selectLead")}</p> : null}
-
-      {leadId ? (
-        <div className="mt-4 grid gap-3">
-          <input
-            type="datetime-local"
-            value={inputValue}
-            onChange={(event) => setInputValue(event.target.value)}
-            className="rounded-xl border border-slate-300 px-3 py-2 text-sm"
-          />
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={() => saveFollowUp(inputValue ? new Date(inputValue).toISOString() : null)}
-              className="rounded-xl bg-slate-900 px-4 py-2 text-xs font-semibold text-white transition hover:bg-slate-700"
-            >
-              {t("followUp.save")}
-            </button>
-            <button
-              type="button"
-              onClick={() => saveFollowUp(null)}
-              className="rounded-xl border border-slate-300 px-4 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-100"
-            >
-              {t("followUp.clear")}
-            </button>
-          </div>
-          {loading ? <p className="text-sm text-slate-600">{t("followUp.loading")}</p> : null}
-          {!loading ? <p className="text-sm text-slate-600">{formatted}</p> : null}
+    <div className="grid gap-3">
+      {formatted ? (
+        <div className="flex items-center gap-2 rounded-lg bg-blue-50 px-3 py-2.5 text-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
+            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+          </svg>
+          <span className="font-medium text-blue-800">{formatted}</span>
         </div>
-      ) : null}
-    </section>
+      ) : (
+        <p className="text-xs text-slate-400">{t("followUp.empty")}</p>
+      )}
+
+      <input
+        type="datetime-local"
+        value={inputValue}
+        onChange={(event) => setInputValue(event.target.value)}
+        className="w-full rounded-lg border border-slate-200 px-3 py-2 text-sm focus:border-slate-400 focus:outline-none focus:ring-1 focus:ring-slate-400"
+      />
+
+      <div className="flex items-center gap-2">
+        <button
+          type="button"
+          onClick={() => saveFollowUp(inputValue ? new Date(inputValue).toISOString() : null)}
+          disabled={saving}
+          className="rounded-lg bg-slate-900 px-4 py-1.5 text-xs font-semibold text-white transition hover:bg-slate-700 disabled:opacity-40"
+        >
+          {saving ? "..." : t("followUp.save")}
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            setInputValue("");
+            saveFollowUp(null);
+          }}
+          disabled={saving}
+          className="rounded-lg border border-slate-200 px-4 py-1.5 text-xs font-semibold text-slate-600 transition hover:bg-slate-50 disabled:opacity-40"
+        >
+          {t("followUp.clear")}
+        </button>
+        {saved ? (
+          <span className="text-xs font-medium text-emerald-600">✓ Saved</span>
+        ) : null}
+      </div>
+    </div>
   );
 }

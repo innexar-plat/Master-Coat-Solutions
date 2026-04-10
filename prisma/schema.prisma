@@ -38,10 +38,48 @@ model Lead {
   source    LeadSource @default(free_estimate)
   status    LeadStatus @default(NEW)
   createdAt DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+  notes     LeadNote[]
+  followUp  LeadFollowUp?
+  activities LeadActivity[]
 
   @@map("leads")
   @@index([createdAt], map: "idx_leads_created_at")
   @@index([status], map: "idx_leads_status")
+}
+
+model LeadNote {
+  id        String   @id @db.Uuid
+  leadId    String   @map("lead_id") @db.Uuid
+  note      String   @db.VarChar(1200)
+  createdBy String   @map("created_by") @db.VarChar(254)
+  createdAt DateTime @map("created_at") @db.Timestamptz(6)
+  lead      Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@map("lead_notes")
+  @@index([leadId, createdAt], map: "idx_lead_notes_lead_id_created_at")
+}
+
+model LeadFollowUp {
+  leadId     String   @id @map("lead_id") @db.Uuid
+  followUpAt DateTime? @map("follow_up_at") @db.Timestamptz(6)
+  updatedAt  DateTime @map("updated_at") @db.Timestamptz(6)
+  lead       Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@map("lead_follow_ups")
+  @@index([followUpAt], map: "idx_lead_follow_ups_follow_up_at")
+}
+
+model LeadActivity {
+  id          String   @id @db.Uuid
+  leadId      String   @map("lead_id") @db.Uuid
+  type        String   @db.VarChar(40)
+  description String   @db.VarChar(300)
+  createdBy   String   @map("created_by") @db.VarChar(254)
+  createdAt   DateTime @map("created_at") @db.Timestamptz(6)
+  lead        Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@map("lead_activities")
+  @@index([leadId, createdAt], map: "idx_lead_activities_lead_id_created_at")
 }
 
 model PixelSettings {
@@ -56,4 +94,65 @@ model PixelSettings {
   updatedAt        DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   @@map("pixel_settings")
+}
+
+model SocialLinksSettings {
+  id          String   @id @default("default") @db.VarChar(32)
+  facebookUrl String   @default("") @map("facebook_url") @db.VarChar(200)
+  instagramUrl String  @default("") @map("instagram_url") @db.VarChar(200)
+  linkedinUrl String   @default("") @map("linkedin_url") @db.VarChar(200)
+  youtubeUrl String    @default("") @map("youtube_url") @db.VarChar(200)
+  tiktokUrl String     @default("") @map("tiktok_url") @db.VarChar(200)
+  xUrl       String    @default("") @map("x_url") @db.VarChar(200)
+  createdAt  DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt  DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@map("social_links_settings")
+}
+
+model GalleryCategory {
+  id        String   @id @db.Uuid
+  name      String   @db.VarChar(80)
+  slug      String   @unique @db.VarChar(100)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @map("updated_at") @db.Timestamptz(6)
+  albums    GalleryAlbum[]
+  items     GalleryItem[]
+
+  @@map("gallery_categories")
+}
+
+model GalleryAlbum {
+  id          String   @id @db.Uuid
+  name        String   @db.VarChar(80)
+  slug        String   @unique @db.VarChar(100)
+  categoryId  String   @map("category_id") @db.Uuid
+  isPublished Boolean  @default(false) @map("is_published")
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime @map("updated_at") @db.Timestamptz(6)
+  category    GalleryCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  items       GalleryItem[]
+
+  @@map("gallery_albums")
+  @@index([categoryId], map: "idx_gallery_albums_category_id")
+}
+
+model GalleryItem {
+  id          String   @id @db.Uuid
+  title       String   @db.VarChar(140)
+  service     String   @db.VarChar(120)
+  location    String   @db.VarChar(120)
+  imageUrl    String   @map("image_url") @db.VarChar(500)
+  categoryId  String   @map("category_id") @db.Uuid
+  albumId     String   @map("album_id") @db.Uuid
+  isPublished Boolean  @default(false) @map("is_published")
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime @map("updated_at") @db.Timestamptz(6)
+  category    GalleryCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  album       GalleryAlbum @relation(fields: [albumId], references: [id], onDelete: Restrict)
+
+  @@map("gallery_items")
+  @@index([categoryId], map: "idx_gallery_items_category_id")
+  @@index([albumId], map: "idx_gallery_items_album_id")
+  @@index([isPublished, createdAt], map: "idx_gallery_items_published_created")
 }

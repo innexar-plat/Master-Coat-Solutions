@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
+import { SiteFooter } from "@/components/shared/SiteFooter";
 import { routing } from "@/i18n/routing";
 
 type LocaleLayoutProps = {
@@ -21,6 +22,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       {children}
+      <SiteFooter locale={locale} />
     </NextIntlClientProvider>
   );
 }

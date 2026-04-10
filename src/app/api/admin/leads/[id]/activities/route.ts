@@ -22,12 +22,28 @@ export async function GET(request: Request, { params }: Params) {
     );
   }
 
-  const data = await listLeadActivities(params.id);
+  try {
+    const data = await listLeadActivities(params.id);
 
-  return NextResponse.json(
-    {
-      data
-    },
-    { status: 200 }
-  );
+    return NextResponse.json(
+      {
+        data
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("[admin/leads/:id/activities] unexpected error", {
+      leadId: params.id,
+      error
+    });
+
+    return NextResponse.json(
+      {
+        statusCode: 500,
+        error: "Internal Server Error",
+        message: "Unexpected error while loading lead activities"
+      },
+      { status: 500 }
+    );
+  }
 }

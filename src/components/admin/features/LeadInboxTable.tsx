@@ -15,39 +15,53 @@ export function LeadInboxTable({ leads, onUpdateStatus, selectedLeadId, onSelect
   const { t } = useAdminI18n();
 
   return (
-    <section className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm md:p-6">
-      <h2 className="text-xl font-black tracking-tight text-slate-900">{t("inbox.title")}</h2>
-      <div className="mt-4 overflow-x-auto">
-        <table className="w-full min-w-[760px] border-collapse text-sm">
+    <section className="rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div className="flex items-center justify-between border-b border-slate-100 px-5 py-3">
+        <h2 className="text-sm font-bold text-slate-900">{t("inbox.title")}</h2>
+        <span className="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-600">
+          {leads.length}
+        </span>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[700px] border-collapse text-sm">
           <thead>
-            <tr className="text-left text-xs uppercase tracking-wide text-slate-500">
-              <th className="border-b border-slate-200 px-3 py-2">{t("inbox.name")}</th>
-              <th className="border-b border-slate-200 px-3 py-2">{t("inbox.phone")}</th>
-              <th className="border-b border-slate-200 px-3 py-2">{t("inbox.service")}</th>
-              <th className="border-b border-slate-200 px-3 py-2">{t("inbox.status")}</th>
-              <th className="border-b border-slate-200 px-3 py-2">{t("inbox.created")}</th>
-              <th className="border-b border-slate-200 px-3 py-2">{t("inbox.action")}</th>
+            <tr className="text-left text-[11px] uppercase tracking-wider text-slate-400">
+              <th className="px-4 py-2.5">{t("inbox.name")}</th>
+              <th className="px-4 py-2.5">{t("inbox.phone")}</th>
+              <th className="px-4 py-2.5">{t("inbox.service")}</th>
+              <th className="px-4 py-2.5">{t("inbox.status")}</th>
+              <th className="px-4 py-2.5">{t("inbox.created")}</th>
+              <th className="px-4 py-2.5">{t("inbox.action")}</th>
             </tr>
           </thead>
           <tbody>
-            {leads.map((lead) => (
-              <tr
-                key={lead.id}
-                className={`align-top ${selectedLeadId === lead.id ? "bg-slate-50" : ""}`}
-              >
-                <td className="border-b border-slate-100 px-3 py-3 font-semibold text-slate-900">{lead.name}</td>
-                <td className="border-b border-slate-100 px-3 py-3 text-slate-700">{lead.phone}</td>
-                <td className="border-b border-slate-100 px-3 py-3 text-slate-700">{lead.service}</td>
-                <td className="border-b border-slate-100 px-3 py-3">
-                  <LeadStatusBadge status={lead.status} />
-                </td>
-                <td className="border-b border-slate-100 px-3 py-3 text-slate-600">{new Date(lead.createdAt).toLocaleString()}</td>
-                <td className="border-b border-slate-100 px-3 py-3">
-                  <div className="flex items-center gap-2">
+            {leads.map((lead) => {
+              const isSelected = selectedLeadId === lead.id;
+
+              return (
+                <tr
+                  key={lead.id}
+                  onClick={() => onSelectLead?.(lead.id)}
+                  className={`cursor-pointer border-t border-slate-50 transition-colors ${
+                    isSelected
+                      ? "bg-blue-50/60 ring-1 ring-inset ring-blue-200"
+                      : "hover:bg-slate-50"
+                  }`}
+                >
+                  <td className="px-4 py-2.5 font-semibold text-slate-900">{lead.name}</td>
+                  <td className="px-4 py-2.5 text-slate-600">{lead.phone}</td>
+                  <td className="px-4 py-2.5 text-slate-600">{lead.service}</td>
+                  <td className="px-4 py-2.5">
+                    <LeadStatusBadge status={lead.status} />
+                  </td>
+                  <td className="px-4 py-2.5 text-xs text-slate-500">
+                    {new Date(lead.createdAt).toLocaleDateString()} {new Date(lead.createdAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                  </td>
+                  <td className="px-4 py-2.5" onClick={(event) => event.stopPropagation()}>
                     <select
                       value={lead.status}
                       onChange={(event) => onUpdateStatus(lead.id, event.target.value as LeadStatus)}
-                      className="rounded-lg border border-slate-300 bg-white px-2 py-1 text-xs"
+                      className="rounded-md border border-slate-300 bg-white px-2 py-1 text-xs focus:border-slate-400 focus:outline-none focus:ring-1 focus:ring-slate-400"
                     >
                       {STATUS_OPTIONS.map((option) => (
                         <option key={option} value={option}>
@@ -55,19 +69,17 @@ export function LeadInboxTable({ leads, onUpdateStatus, selectedLeadId, onSelect
                         </option>
                       ))}
                     </select>
-                    {onSelectLead ? (
-                      <button
-                        type="button"
-                        onClick={() => onSelectLead(lead.id)}
-                        className="rounded-lg border border-slate-300 px-2 py-1 text-xs font-semibold text-slate-700 hover:bg-slate-100"
-                      >
-                        {t("inbox.notes")}
-                      </button>
-                    ) : null}
-                  </div>
+                  </td>
+                </tr>
+              );
+            })}
+            {leads.length === 0 ? (
+              <tr>
+                <td colSpan={6} className="py-8 text-center text-sm text-slate-400">
+                  No leads found
                 </td>
               </tr>
-            ))}
+            ) : null}
           </tbody>
         </table>
       </div>

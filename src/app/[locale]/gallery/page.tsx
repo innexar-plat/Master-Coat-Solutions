@@ -2,17 +2,14 @@ import { getTranslations } from "next-intl/server";
 import { SiteHeader } from "@/components/shared/SiteHeader";
 import { PageIntro } from "@/components/public/sections/PageIntro";
 import { GalleryProjectGrid } from "@/components/public/features/GalleryProjectGrid";
-import { listPublicGalleryItems } from "@/modules/gallery/services/gallery-storage.service";
+import { listPublicGalleryItems, listPublicCategories } from "@/modules/gallery/services/gallery-storage.service";
 
 export default async function GalleryPage() {
   const t = await getTranslations("Pages");
-  const storedItems = await listPublicGalleryItems();
-
-  const fallbackProjects = [
-    { title: t("galleryProjectOne"), location: "Orlando", service: "Interior Painting" },
-    { title: t("galleryProjectTwo"), location: "Winter Park", service: "Exterior Painting" },
-    { title: t("galleryProjectThree"), location: "Kissimmee", service: "Trim and Detail" }
-  ];
+  const [storedItems, categories] = await Promise.all([
+    listPublicGalleryItems(),
+    listPublicCategories()
+  ]);
 
   const projects =
     storedItems.length > 0
@@ -24,7 +21,7 @@ export default async function GalleryPage() {
           albumName: item.albumName,
           imageUrl: item.imageUrl
         }))
-      : fallbackProjects;
+      : [];
 
   return (
     <main className="min-h-screen">
@@ -33,6 +30,7 @@ export default async function GalleryPage() {
       <GalleryProjectGrid
         title={t("galleryGridTitle")}
         projects={projects}
+        categories={categories.map((c) => c.name)}
       />
     </main>
   );

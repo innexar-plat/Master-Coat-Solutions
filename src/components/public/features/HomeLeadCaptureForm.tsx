@@ -131,7 +131,7 @@ export function HomeLeadCaptureForm({
       service: values.service,
       message: values.message.trim(),
       locale,
-      source: "home-contact"
+      source: "contact"
     };
 
     try {

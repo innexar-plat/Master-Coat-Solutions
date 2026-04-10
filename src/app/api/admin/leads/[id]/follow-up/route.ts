@@ -102,6 +102,11 @@ export async function PATCH(request: Request, { params }: Params) {
       );
     }
 
+    console.error("[admin/leads/:id/follow-up] unexpected error", {
+      leadId: params.id,
+      error
+    });
+
     return NextResponse.json(
       {
         statusCode: 500,

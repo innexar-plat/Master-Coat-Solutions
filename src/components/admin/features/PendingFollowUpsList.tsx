@@ -57,61 +57,63 @@ export function PendingFollowUpsList() {
   }
 
   return (
-    <section className="mt-8 rounded-3xl border border-slate-200 bg-white p-5 md:p-6">
-      <div className="flex flex-wrap items-center justify-between gap-3">
+    <section className="rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 px-5 py-3.5">
         <div>
-          <h2 className="text-xl font-black tracking-tight text-slate-900">{t("pending.queueTitle")}</h2>
-          <p className="mt-1 text-sm text-slate-600">{t("pending.queueDescription")}</p>
+          <h2 className="text-base font-bold text-slate-900">{t("pending.queueTitle")}</h2>
+          <p className="mt-0.5 text-xs text-slate-500">{t("pending.queueDescription")}</p>
         </div>
         <a
           href="/admin/leads"
-          className="inline-flex rounded-full border border-slate-300 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:bg-slate-100"
+          className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-600 transition hover:bg-slate-50"
         >
           {t("pending.openCrm")}
         </a>
       </div>
 
-      {status === "loading" ? <p className="mt-4 text-sm text-slate-600">{t("pending.loading")}</p> : null}
-      {status === "error" ? (
-        <p className="mt-4 text-sm font-semibold text-red-700">{t("pending.error")}</p>
-      ) : null}
-      {status === "ready" && items.length === 0 ? <p className="mt-4 text-sm text-slate-600">{t("pending.empty")}</p> : null}
+      <div className="px-5 py-3">
+        {status === "loading" ? <p className="py-3 text-sm text-slate-500">{t("pending.loading")}</p> : null}
+        {status === "error" ? (
+          <p className="py-3 text-sm font-medium text-red-600">{t("pending.error")}</p>
+        ) : null}
+        {status === "ready" && items.length === 0 ? <p className="py-3 text-sm text-slate-500">{t("pending.empty")}</p> : null}
 
-      {status === "ready" && items.length > 0 ? (
-        <div className="mt-4 overflow-x-auto">
-          <table className="w-full min-w-[640px] border-collapse text-sm">
-            <thead>
-              <tr className="text-left text-xs uppercase tracking-wide text-slate-500">
-                <th className="border-b border-slate-200 px-3 py-2">{t("pending.table.lead")}</th>
-                <th className="border-b border-slate-200 px-3 py-2">{t("pending.table.phone")}</th>
-                <th className="border-b border-slate-200 px-3 py-2">{t("pending.table.status")}</th>
-                <th className="border-b border-slate-200 px-3 py-2">{t("pending.table.dueAt")}</th>
-                <th className="border-b border-slate-200 px-3 py-2">{t("pending.table.action")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {items.map((item) => (
-                <tr key={item.leadId}>
-                  <td className="border-b border-slate-100 px-3 py-3 font-semibold text-slate-900">{item.leadName}</td>
-                  <td className="border-b border-slate-100 px-3 py-3 text-slate-700">{item.leadPhone}</td>
-                  <td className="border-b border-slate-100 px-3 py-3 text-slate-700">{t(`status.${item.leadStatus}`)}</td>
-                  <td className="border-b border-slate-100 px-3 py-3 text-slate-700">{new Date(item.followUpAt).toLocaleString()}</td>
-                  <td className="border-b border-slate-100 px-3 py-3">
-                    <button
-                      type="button"
-                      onClick={() => markFollowUpAsDone(item.leadId)}
-                      disabled={processingLeadId === item.leadId}
-                      className="rounded-lg border border-slate-300 px-3 py-1 text-xs font-semibold text-slate-700 transition hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-60"
-                    >
-                      {processingLeadId === item.leadId ? t("pending.saving") : t("pending.markDone")}
-                    </button>
-                  </td>
+        {status === "ready" && items.length > 0 ? (
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[640px] border-collapse text-sm">
+              <thead>
+                <tr className="text-left text-[11px] uppercase tracking-wider text-slate-400">
+                  <th className="pb-2 pr-3 font-medium">{t("pending.table.lead")}</th>
+                  <th className="pb-2 pr-3 font-medium">{t("pending.table.phone")}</th>
+                  <th className="pb-2 pr-3 font-medium">{t("pending.table.status")}</th>
+                  <th className="pb-2 pr-3 font-medium">{t("pending.table.dueAt")}</th>
+                  <th className="pb-2 font-medium">{t("pending.table.action")}</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ) : null}
+              </thead>
+              <tbody>
+                {items.map((item) => (
+                  <tr key={item.leadId} className="border-t border-slate-50 hover:bg-slate-50/50">
+                    <td className="py-2.5 pr-3 font-medium text-slate-900">{item.leadName}</td>
+                    <td className="py-2.5 pr-3 text-slate-600">{item.leadPhone}</td>
+                    <td className="py-2.5 pr-3 text-slate-600">{t(`status.${item.leadStatus}`)}</td>
+                    <td className="py-2.5 pr-3 text-slate-600">{new Date(item.followUpAt).toLocaleString()}</td>
+                    <td className="py-2.5">
+                      <button
+                        type="button"
+                        onClick={() => markFollowUpAsDone(item.leadId)}
+                        disabled={processingLeadId === item.leadId}
+                        className="rounded-md bg-slate-900 px-2.5 py-1 text-xs font-medium text-white transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
+                      >
+                        {processingLeadId === item.leadId ? t("pending.saving") : t("pending.markDone")}
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : null}
+      </div>
     </section>
   );
 }

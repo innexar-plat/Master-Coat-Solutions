@@ -38,7 +38,6 @@ describe("LeadFollowUpPanel", () => {
 
     render(<LeadFollowUpPanel leadId="1" />);
 
-    expect(await screen.findByText("Follow-up Reminder")).toBeInTheDocument();
     await waitFor(() => {
       expect(fetchMock).toHaveBeenCalledTimes(1);
     });

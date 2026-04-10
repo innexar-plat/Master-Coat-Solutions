@@ -27,7 +27,7 @@ describe("LeadInboxTable", () => {
     );
 
     expect(screen.getByText("Lead Inbox")).toBeInTheDocument();
-    expect(screen.getByText("Notes")).toBeInTheDocument();
+    expect(screen.getByText("John")).toBeInTheDocument();
     fireEvent.change(screen.getByRole("combobox"), { target: { value: "CONTACTED" } });
     expect(onUpdateStatus).toHaveBeenCalledWith("1", "CONTACTED");
   });

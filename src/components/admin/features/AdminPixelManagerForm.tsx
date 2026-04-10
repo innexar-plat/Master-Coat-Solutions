@@ -66,56 +66,90 @@ export function AdminPixelManagerForm() {
   }
 
   return (
-    <form aria-label="pixel-manager-form" onSubmit={handleSave} className="grid gap-4 rounded-3xl border border-slate-200 bg-white p-5 md:p-6">
-      <label className="flex items-center gap-2 text-sm font-medium text-slate-800">
-        <input
-          type="checkbox"
-          checked={settings.enabled}
-          onChange={(event) => setSettings((current) => ({ ...current, enabled: event.target.checked }))}
-        />
-        {t("pixels.enable")}
-      </label>
+    <form aria-label="pixel-manager-form" onSubmit={handleSave} className="rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div className="border-b border-slate-100 px-5 py-3.5">
+        <h2 className="text-base font-bold text-slate-900">Tracking Pixels</h2>
+        <p className="mt-0.5 text-xs text-slate-500">Configure your analytics and advertising pixels</p>
+      </div>
 
-      <input
-        value={settings.ga4MeasurementId}
-        onChange={(event) => setSettings((current) => ({ ...current, ga4MeasurementId: event.target.value }))}
-        className="rounded-xl border border-slate-300 px-4 py-3 text-sm"
-        placeholder="GA4 Measurement ID (G-XXXX)"
-      />
-      <input
-        value={settings.gtmId}
-        onChange={(event) => setSettings((current) => ({ ...current, gtmId: event.target.value }))}
-        className="rounded-xl border border-slate-300 px-4 py-3 text-sm"
-        placeholder="GTM Container ID (GTM-XXXX)"
-      />
-      <input
-        value={settings.metaPixelId}
-        onChange={(event) => setSettings((current) => ({ ...current, metaPixelId: event.target.value }))}
-        className="rounded-xl border border-slate-300 px-4 py-3 text-sm"
-        placeholder="Meta Pixel ID"
-      />
-      <input
-        value={settings.googleAdsId}
-        onChange={(event) => setSettings((current) => ({ ...current, googleAdsId: event.target.value }))}
-        className="rounded-xl border border-slate-300 px-4 py-3 text-sm"
-        placeholder="Google Ads ID (AW-XXXX)"
-      />
-      <input
-        value={settings.tiktokPixelId}
-        onChange={(event) => setSettings((current) => ({ ...current, tiktokPixelId: event.target.value }))}
-        className="rounded-xl border border-slate-300 px-4 py-3 text-sm"
-        placeholder="TikTok Pixel ID"
-      />
+      <div className="grid gap-4 px-5 py-4">
+        <label className="flex items-center gap-2.5 text-sm font-medium text-slate-700">
+          <input
+            type="checkbox"
+            checked={settings.enabled}
+            onChange={(event) => setSettings((current) => ({ ...current, enabled: event.target.checked }))}
+            className="h-4 w-4 rounded border-slate-300"
+          />
+          {t("pixels.enable")}
+        </label>
 
-      <button
-        type="submit"
-        disabled={status === "saving"}
-        className="inline-flex w-fit rounded-full bg-slate-900 px-5 py-2 text-xs font-semibold text-white transition hover:bg-slate-700 disabled:opacity-70"
-      >
-        {status === "saving" ? t("pending.saving") : t("pixels.save")}
-      </button>
+        <div>
+          <label htmlFor="px-ga4" className="mb-1 block text-xs font-medium text-slate-600">GA4 Measurement ID</label>
+          <input
+            id="px-ga4"
+            value={settings.ga4MeasurementId}
+            onChange={(event) => setSettings((current) => ({ ...current, ga4MeasurementId: event.target.value }))}
+            className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm transition focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-200"
+            placeholder="G-XXXXXXXXXX"
+          />
+        </div>
+        <div>
+          <label htmlFor="px-gtm" className="mb-1 block text-xs font-medium text-slate-600">GTM Container ID</label>
+          <input
+            id="px-gtm"
+            value={settings.gtmId}
+            onChange={(event) => setSettings((current) => ({ ...current, gtmId: event.target.value }))}
+            className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm transition focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-200"
+            placeholder="GTM-XXXXXXX"
+          />
+        </div>
+        <div>
+          <label htmlFor="px-meta" className="mb-1 block text-xs font-medium text-slate-600">Meta Pixel ID</label>
+          <input
+            id="px-meta"
+            value={settings.metaPixelId}
+            onChange={(event) => setSettings((current) => ({ ...current, metaPixelId: event.target.value }))}
+            className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm transition focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-200"
+            placeholder="000000000000000"
+          />
+        </div>
+        <div>
+          <label htmlFor="px-gads" className="mb-1 block text-xs font-medium text-slate-600">Google Ads ID</label>
+          <input
+            id="px-gads"
+            value={settings.googleAdsId}
+            onChange={(event) => setSettings((current) => ({ ...current, googleAdsId: event.target.value }))}
+            className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm transition focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-200"
+            placeholder="AW-XXXXXXXXX"
+          />
+        </div>
+        <div>
+          <label htmlFor="px-tt" className="mb-1 block text-xs font-medium text-slate-600">TikTok Pixel ID</label>
+          <input
+            id="px-tt"
+            value={settings.tiktokPixelId}
+            onChange={(event) => setSettings((current) => ({ ...current, tiktokPixelId: event.target.value }))}
+            className="w-full rounded-lg border border-slate-200 px-3.5 py-2.5 text-sm transition focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-200"
+            placeholder="XXXXXXXXXXXXXXX"
+          />
+        </div>
+      </div>
 
-      {status === "saved" ? <p className="text-sm font-medium text-emerald-700">{t("pixels.saved")}</p> : null}
+      <div className="flex items-center gap-3 border-t border-slate-100 px-5 py-3.5">
+        <button
+          type="submit"
+          disabled={status === "saving"}
+          className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white transition hover:bg-slate-800 disabled:opacity-60"
+        >
+          {status === "saving" ? t("pending.saving") : t("pixels.save")}
+        </button>
+
+        {status === "saved" ? (
+          <span className="flex items-center gap-1 text-sm font-medium text-emerald-600">
+            <span>✓</span> {t("pixels.saved")}
+          </span>
+        ) : null}
+      </div>
     </form>
   );
 }

@@ -25,8 +25,8 @@ describe("AdminLoginForm", () => {
       />
     );
 
-    fireEvent.change(screen.getByPlaceholderText("Email"), { target: { value: "admin@vinipainting.com" } });
-    fireEvent.change(screen.getByPlaceholderText("Password"), { target: { value: "wrong-password" } });
+    fireEvent.change(screen.getByPlaceholderText("admin@example.com"), { target: { value: "admin@vinipainting.com" } });
+    fireEvent.change(screen.getByPlaceholderText("••••••••"), { target: { value: "wrong-password" } });
     fireEvent.submit(screen.getByRole("form", { name: "admin-login-form" }));
 
     expect(await screen.findByText("Invalid credentials")).toBeInTheDocument();

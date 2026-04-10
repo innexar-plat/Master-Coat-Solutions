@@ -90,6 +90,11 @@ export async function POST(request: Request, { params }: Params) {
       );
     }
 
+    console.error("[admin/leads/:id/notes] unexpected error", {
+      leadId: params.id,
+      error
+    });
+
     return NextResponse.json(
       {
         statusCode: 500,

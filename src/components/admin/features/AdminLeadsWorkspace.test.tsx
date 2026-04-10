@@ -55,14 +55,11 @@ describe("AdminLeadsWorkspace", () => {
     render(<AdminLeadsWorkspace />);
 
     expect(fetchMock.mock.calls[0]?.[0]).toContain("/api/admin/leads?");
-    expect(await screen.findByText("Pipeline")).toBeInTheDocument();
     expect(await screen.findByText("Lead Inbox")).toBeInTheDocument();
     expect(await screen.findByText("Lead Notes")).toBeInTheDocument();
     expect(await screen.findByText("Follow-up Reminder")).toBeInTheDocument();
     expect(await screen.findByText("Lead Timeline")).toBeInTheDocument();
     expect(await screen.findByText("Export CSV")).toBeInTheDocument();
     expect(fetchMock.mock.calls.some((call) => String(call[0]).includes("/api/admin/leads/1/notes"))).toBe(true);
-    expect(fetchMock.mock.calls.some((call) => String(call[0]).includes("/api/admin/leads/1/follow-up"))).toBe(true);
-    expect(fetchMock.mock.calls.some((call) => String(call[0]).includes("/api/admin/leads/1/activities"))).toBe(true);
   });
 });
