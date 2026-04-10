@@ -1,0 +1,324 @@
+[
+  {
+    "id": "ff3353b2-8031-47c7-9baf-19ef39062f05",
+    "leadId": "1",
+    "type": "STATUS_CHANGED",
+    "description": "Status changed to CONTACTED",
+    "createdBy": "admin",
+    "createdAt": "2026-04-09T12:13:33.501Z"
+  },
+  {
+    "id": "e835481c-742f-4d32-927e-0825799cffc2",
+    "leadId": "1",
+    "type": "STATUS_CHANGED",
+    "description": "Status changed to CONTACTED",
+    "createdBy": "admin",
+    "createdAt": "2026-04-08T13:15:58.324Z"
+  },
+  {
+    "id": "ccf23b6f-4d01-4501-afb6-707f8bf43720",
+    "leadId": "1",
+    "type": "FOLLOW_UP_UPDATED",
+    "description": "Follow-up scheduled for 08/04/2026, 10:15:58",
+    "createdBy": "admin",
+    "createdAt": "2026-04-08T13:15:58.288Z"
+  },
+  {
+    "id": "fe51bda2-af4c-4e17-a554-5a8173554e45",
+    "leadId": "1",
+    "type": "NOTE_ADDED",
+    "description": "Note added: follow up",
+    "createdBy": "admin@vinipainting.com",
+    "createdAt": "2026-04-08T13:15:58.179Z"
+  },
+  {
+    "id": "2a9167b8-eb42-48e7-82b5-2026ff581fa0",
+    "leadId": "1",
+    "type": "NOTE_ADDED",
+    "description": "Note added: follow up",
+    "createdBy": "admin@vinipainting.com",
+    "createdAt": "2026-04-03T21:54:13.429Z"
+  },
+  {
+    "id": "ab46f289-6746-4560-8d9b-0c948eb6cf94",
+    "leadId": "1",
+    "type": "FOLLOW_UP_UPDATED",
+    "description": "Follow-up scheduled for 03/04/2026, 18:54:11",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T21:54:11.142Z"
+  },
+  {
+    "id": "44073db0-1f3d-48b8-a0c5-042bc78011c6",
+    "leadId": "1",
+    "type": "STATUS_CHANGED",
+    "description": "Status changed to CONTACTED",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T21:54:10.862Z"
+  },
+  {
+    "id": "2f73022c-931a-4450-a6e1-aef1bdf63304",
+    "leadId": "1",
+    "type": "STATUS_CHANGED",
+    "description": "Status changed to CONTACTED",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T21:53:01.204Z"
+  },
+  {
+    "id": "38f166ec-383c-49de-97cc-e159bd85370b",
+    "leadId": "1",
+    "type": "NOTE_ADDED",
+    "description": "Note added: follow up",
+    "createdBy": "admin@vinipainting.com",
+    "createdAt": "2026-04-03T21:53:01.066Z"
+  },
+  {
+    "id": "2069dfcb-7c75-4c19-a244-2453e0cacd32",
+    "leadId": "1",
+    "type": "FOLLOW_UP_UPDATED",
+    "description": "Follow-up scheduled for 03/04/2026, 18:52:58",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T21:52:58.951Z"
+  },
+  {
+    "id": "a5293872-ab75-4586-b864-7c86bf198225",
+    "leadId": "1",
+    "type": "NOTE_ADDED",
+    "description": "Note added: follow up",
+    "createdBy": "admin@vinipainting.com",
+    "createdAt": "2026-04-03T21:36:53.773Z"
+  },
+  {
+    "id": "f418bd5d-0dbe-4e2d-8ca6-4a4822abbee4",
+    "leadId": "1",
+    "type": "STATUS_CHANGED",
+    "description": "Status changed to CONTACTED",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T21:36:53.675Z"
+  },
+  {
+    "id": "4bdb6a76-09b4-4015-8c40-45d80bec4225",
+    "leadId": "1",
+    "type": "FOLLOW_UP_UPDATED",
+    "description": "Follow-up scheduled for 03/04/2026, 18:36:51",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T21:36:51.381Z"
+  },
+  {
+    "id": "0591b32d-c693-4e69-9ff3-a3416c53ad7e",
+    "leadId": "1",
+    "type": "FOLLOW_UP_UPDATED",
+    "description": "Follow-up scheduled for 03/04/2026, 18:31:52",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T21:31:52.792Z"
+  },
+  {
+    "id": "511fcbfe-b29e-45ef-ab8c-f3ff935f3fbc",
+    "leadId": "1",
+    "type": "STATUS_CHANGED",
+    "description": "Status changed to CONTACTED",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T21:31:52.778Z"
+  },
+  {
+    "id": "f81ac96e-782a-4475-973c-0f21cd773c7b",
+    "leadId": "1",
+    "type": "NOTE_ADDED",
+    "description": "Note added: follow up",
+    "createdBy": "admin@vinipainting.com",
+    "createdAt": "2026-04-03T21:31:52.776Z"
+  },
+  {
+    "id": "4c66c0b8-2eb2-4f6e-93d5-9c5aac19b484",
+    "leadId": "1",
+    "type": "NOTE_ADDED",
+    "description": "Note added: follow up",
+    "createdBy": "admin@vinipainting.com",
+    "createdAt": "2026-04-03T18:45:28.192Z"
+  },
+  {
+    "id": "4d17d7b6-7848-4650-8874-3dbea75eab2e",
+    "leadId": "1",
+    "type": "STATUS_CHANGED",
+    "description": "Status changed to CONTACTED",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T18:45:27.948Z"
+  },
+  {
+    "id": "633c7ed8-d765-4b84-91d3-0e523ad9f368",
+    "leadId": "1",
+    "type": "FOLLOW_UP_UPDATED",
+    "description": "Follow-up scheduled for 03/04/2026, 15:45:27",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T18:45:27.884Z"
+  },
+  {
+    "id": "cadf03be-2340-4eab-8901-5dc8a0e8d817",
+    "leadId": "1",
+    "type": "STATUS_CHANGED",
+    "description": "Status changed to CONTACTED",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T18:44:27.366Z"
+  },
+  {
+    "id": "08a35c05-76b8-46e9-b3ad-3a11d0ed5524",
+    "leadId": "1",
+    "type": "FOLLOW_UP_UPDATED",
+    "description": "Follow-up scheduled for 03/04/2026, 15:44:25",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T18:44:25.509Z"
+  },
+  {
+    "id": "4cbee66a-edd9-4663-9a0a-dfa709b7e4b2",
+    "leadId": "1",
+    "type": "NOTE_ADDED",
+    "description": "Note added: follow up",
+    "createdBy": "admin@vinipainting.com",
+    "createdAt": "2026-04-03T18:44:25.494Z"
+  },
+  {
+    "id": "db6f5fcd-35c5-480a-a6d5-a6118e0043ba",
+    "leadId": "1",
+    "type": "NOTE_ADDED",
+    "description": "Note added: follow up",
+    "createdBy": "admin@vinipainting.com",
+    "createdAt": "2026-04-03T18:43:51.437Z"
+  },
+  {
+    "id": "cf603413-5873-4b96-8276-6dba22aa4266",
+    "leadId": "1",
+    "type": "FOLLOW_UP_UPDATED",
+    "description": "Follow-up scheduled for 03/04/2026, 15:43:49",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T18:43:49.383Z"
+  },
+  {
+    "id": "1e75797f-f7cc-457d-8772-f2c2914fc055",
+    "leadId": "1",
+    "type": "STATUS_CHANGED",
+    "description": "Status changed to CONTACTED",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T18:43:49.366Z"
+  },
+  {
+    "id": "22f904d2-e28b-491e-a69f-39c84a5e9dc1",
+    "leadId": "1",
+    "type": "NOTE_ADDED",
+    "description": "Note added: follow up",
+    "createdBy": "admin@vinipainting.com",
+    "createdAt": "2026-04-03T18:17:22.120Z"
+  },
+  {
+    "id": "e26e0ca5-2988-43d4-a9a8-ead368f0002b",
+    "leadId": "1",
+    "type": "STATUS_CHANGED",
+    "description": "Status changed to CONTACTED",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T18:17:22.111Z"
+  },
+  {
+    "id": "6066fe5c-b788-4b3a-a074-5979bdffcd32",
+    "leadId": "1",
+    "type": "FOLLOW_UP_UPDATED",
+    "description": "Follow-up scheduled for 03/04/2026, 15:17:22",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T18:17:22.089Z"
+  },
+  {
+    "id": "3d9461d8-47ef-4c92-97b6-eeedc36c6463",
+    "leadId": "1",
+    "type": "NOTE_ADDED",
+    "description": "Note added: follow up",
+    "createdBy": "admin@vinipainting.com",
+    "createdAt": "2026-04-03T17:39:55.909Z"
+  },
+  {
+    "id": "b8424e1c-c07a-4e2d-abb5-88e25100d759",
+    "leadId": "1",
+    "type": "STATUS_CHANGED",
+    "description": "Status changed to CONTACTED",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T17:39:55.906Z"
+  },
+  {
+    "id": "7efe63b6-f83d-4cfd-a2b1-c2ebc3cb8ef1",
+    "leadId": "1",
+    "type": "FOLLOW_UP_UPDATED",
+    "description": "Follow-up scheduled for 03/04/2026, 14:39:55",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T17:39:55.901Z"
+  },
+  {
+    "id": "11ddb35e-fcd4-4654-a46c-b1d6f315260c",
+    "leadId": "1",
+    "type": "NOTE_ADDED",
+    "description": "Note added: follow up",
+    "createdBy": "admin@vinipainting.com",
+    "createdAt": "2026-04-03T17:38:41.999Z"
+  },
+  {
+    "id": "25a82eb3-283c-43e6-ba1f-d0c6d7724bef",
+    "leadId": "1",
+    "type": "FOLLOW_UP_UPDATED",
+    "description": "Follow-up scheduled for 03/04/2026, 14:38:41",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T17:38:41.981Z"
+  },
+  {
+    "id": "11d9366f-1ea9-4549-b5d9-924ee393bfc2",
+    "leadId": "1",
+    "type": "STATUS_CHANGED",
+    "description": "Status changed to CONTACTED",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T17:38:41.937Z"
+  },
+  {
+    "id": "9ac5193b-05e9-4234-96c9-c0aad96ad940",
+    "leadId": "1",
+    "type": "STATUS_CHANGED",
+    "description": "Status changed to CONTACTED",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T17:36:39.352Z"
+  },
+  {
+    "id": "5bc33314-28c4-493f-8c13-d92129139e12",
+    "leadId": "1",
+    "type": "FOLLOW_UP_UPDATED",
+    "description": "Follow-up scheduled for 03/04/2026, 14:36:39",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T17:36:39.264Z"
+  },
+  {
+    "id": "e3a14a0b-fc1e-45a3-85a7-a338abe13e41",
+    "leadId": "1",
+    "type": "NOTE_ADDED",
+    "description": "Note added: follow up",
+    "createdBy": "admin@vinipainting.com",
+    "createdAt": "2026-04-03T17:36:39.249Z"
+  },
+  {
+    "id": "6183ffd0-000d-4a79-b5ba-84eeb7494460",
+    "leadId": "1",
+    "type": "FOLLOW_UP_UPDATED",
+    "description": "Follow-up scheduled for 03/04/2026, 14:36:12",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T17:36:12.350Z"
+  },
+  {
+    "id": "a311123e-625b-4fb4-a3e1-8ee031a03ed2",
+    "leadId": "1",
+    "type": "NOTE_ADDED",
+    "description": "Note added: follow up",
+    "createdBy": "admin@vinipainting.com",
+    "createdAt": "2026-04-03T17:36:12.245Z"
+  },
+  {
+    "id": "987ae560-3d70-456a-8666-5214309078cc",
+    "leadId": "1",
+    "type": "STATUS_CHANGED",
+    "description": "Status changed to CONTACTED",
+    "createdBy": "admin",
+    "createdAt": "2026-04-03T17:36:12.246Z"
+  }
+]"
+  }
+]

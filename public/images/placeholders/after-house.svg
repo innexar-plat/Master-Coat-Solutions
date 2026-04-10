@@ -1,0 +1,7 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="After house placeholder">
+  <rect width="1200" height="720" fill="#dbeafe"/>
+  <rect x="140" y="320" width="920" height="260" fill="#3b82f6"/>
+  <polygon points="600,150 1030,330 170,330" fill="#1e293b"/>
+  <rect x="520" y="390" width="170" height="190" fill="#bfdbfe"/>
+  <text x="170" y="660" fill="#1e293b" font-size="52" font-family="Arial, sans-serif">After</text>
+</svg>

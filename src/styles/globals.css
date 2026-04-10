@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "./paint-motion.css";
+
+:root {
+  color-scheme: light;
+  --theme-primary: #3b82f6;
+  --theme-primary-strong: #2563eb;
+  --theme-secondary: #1e293b;
+  --theme-surface: #ffffff;
+  --theme-surface-soft: #f8fbff;
+  --theme-text: #0f172a;
+  --theme-text-soft: #475569;
+  --theme-border: #d5e2f5;
+}
+
+body {
+  min-height: 100vh;
+  background: #ffffff;
+  color: var(--theme-text);
+  overflow-x: hidden;
+}
+
+@layer utilities {
+  .bg-theme-primary {
+    background-color: var(--theme-primary);
+  }
+
+  .bg-theme-primary-strong {
+    background-color: var(--theme-primary-strong);
+  }
+
+  .bg-theme-surface {
+    background-color: var(--theme-surface);
+  }
+
+  .bg-theme-surface-soft {
+    background-color: var(--theme-surface-soft);
+  }
+
+  .text-theme-primary {
+    color: var(--theme-primary);
+  }
+
+  .text-theme-secondary {
+    color: var(--theme-secondary);
+  }
+
+  .text-theme-text {
+    color: var(--theme-text);
+  }
+
+  .text-theme-soft {
+    color: var(--theme-text-soft);
+  }
+
+  .border-theme {
+    border-color: var(--theme-border);
+  }
+
+  .ring-theme {
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--theme-primary) 20%, transparent);
+  }
+}

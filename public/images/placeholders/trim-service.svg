@@ -1,0 +1,10 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Trim detail placeholder">
+  <rect width="1200" height="720" fill="#f8fafc"/>
+  <rect x="110" y="100" width="980" height="520" rx="26" fill="#e2e8f0"/>
+  <rect x="170" y="160" width="860" height="400" rx="20" fill="#ffffff"/>
+  <rect x="220" y="210" width="760" height="40" rx="8" fill="#1e293b"/>
+  <rect x="220" y="270" width="760" height="26" rx="8" fill="#3b82f6"/>
+  <rect x="220" y="314" width="760" height="26" rx="8" fill="#60a5fa"/>
+  <rect x="220" y="358" width="760" height="26" rx="8" fill="#93c5fd"/>
+  <text x="220" y="470" fill="#1e293b" font-size="44" font-family="Arial, sans-serif">Trim and Detail Finishes</text>
+</svg>

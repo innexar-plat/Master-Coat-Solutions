@@ -1,0 +1,40 @@
+<svg width="1600" height="900" viewBox="0 0 1600 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF7EC"/>
+      <stop offset="1" stop-color="#EAF2FF"/>
+    </linearGradient>
+    <linearGradient id="wall" x1="280" y1="160" x2="1320" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5F0E6"/>
+      <stop offset="1" stop-color="#E5D9C8"/>
+    </linearGradient>
+    <linearGradient id="paint" x1="770" y1="260" x2="1020" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2C66D5"/>
+      <stop offset="1" stop-color="#1D3F8E"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect x="0" y="700" width="1600" height="200" fill="#D6C7AF"/>
+
+  <rect x="260" y="140" width="1080" height="620" rx="28" fill="url(#wall)" stroke="#C9BBA5" stroke-width="6"/>
+  <rect x="314" y="208" width="760" height="470" rx="16" fill="#F0E7D6"/>
+
+  <path d="M784 236C867 246 944 308 975 390C1006 472 989 569 927 631C864 693 770 709 689 673" stroke="url(#paint)" stroke-width="124" stroke-linecap="round"/>
+  <path d="M728 240C796 247 865 292 901 353C938 414 935 496 893 557" stroke="#7FA4F0" stroke-opacity="0.32" stroke-width="54" stroke-linecap="round"/>
+
+  <ellipse cx="1170" cy="720" rx="175" ry="40" fill="#A69883" fill-opacity="0.35"/>
+  <rect x="1068" y="362" width="134" height="342" rx="56" fill="#2F3A4A"/>
+  <circle cx="1136" cy="292" r="58" fill="#E2B79A"/>
+  <rect x="1078" y="434" width="112" height="214" rx="24" fill="#344357"/>
+  <rect x="1060" y="486" width="74" height="34" rx="17" fill="#E2B79A"/>
+  <rect x="1108" y="502" width="106" height="22" rx="10" fill="#8C6E4A"/>
+
+  <rect x="994" y="498" width="122" height="18" rx="9" fill="#5B452D" transform="rotate(-18 994 498)"/>
+  <rect x="932" y="460" width="102" height="46" rx="12" fill="#E8E5DD" transform="rotate(-18 932 460)"/>
+  <rect x="928" y="460" width="106" height="34" rx="11" fill="#2E65D1" transform="rotate(-18 928 460)"/>
+
+  <rect x="1228" y="640" width="150" height="70" rx="18" fill="#F7F6F2" stroke="#CFC8B8" stroke-width="4"/>
+  <circle cx="1266" cy="676" r="18" fill="#2C66D5"/>
+  <circle cx="1320" cy="676" r="18" fill="#E65142"/>
+</svg>

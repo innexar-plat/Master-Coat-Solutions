@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  QUOTED
+  WON
+  LOST
+}
+
+enum LeadLocale {
+  en
+  pt
+  es
+}
+
+enum LeadSource {
+  free_estimate
+  contact
+  landing_page
+}
+
+model Lead {
+  id        String     @id @db.Uuid
+  name      String     @db.VarChar(120)
+  phone     String     @db.VarChar(30)
+  email     String?    @db.VarChar(254)
+  service   String     @db.VarChar(120)
+  message   String?
+  locale    LeadLocale @default(en)
+  source    LeadSource @default(free_estimate)
+  status    LeadStatus @default(NEW)
+  createdAt DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@map("leads")
+  @@index([createdAt], map: "idx_leads_created_at")
+  @@index([status], map: "idx_leads_status")
+}
+
+model PixelSettings {
+  id               String   @id @default("default") @db.VarChar(32)
+  enabled          Boolean  @default(false)
+  ga4MeasurementId String   @default("") @map("ga4_measurement_id") @db.VarChar(80)
+  gtmId            String   @default("") @map("gtm_id") @db.VarChar(80)
+  metaPixelId      String   @default("") @map("meta_pixel_id") @db.VarChar(80)
+  googleAdsId      String   @default("") @map("google_ads_id") @db.VarChar(80)
+  tiktokPixelId    String   @default("") @map("tiktok_pixel_id") @db.VarChar(80)
+  createdAt        DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt        DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  @@map("pixel_settings")
+}

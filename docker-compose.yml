@@ -1,0 +1,41 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: vini-painting-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: vini_painting
+      POSTGRES_USER: vini_admin
+      POSTGRES_PASSWORD: vini_secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vini_admin -d vini_painting"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vini-painting-app
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: ${DATABASE_URL:-postgresql://vini_admin:vini_secret@postgres:5432/vini_painting?schema=public}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@vinipainting.com}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      ADMIN_ROLE: ${ADMIN_ROLE:-SUPER_ADMIN}
+      ADMIN_SESSION_SECRET: ${ADMIN_SESSION_SECRET}
+      ALLOW_FILE_LEAD_STORAGE_FALLBACK: ${ALLOW_FILE_LEAD_STORAGE_FALLBACK:-false}
+    ports:
+      - "3010:3000"
+
+volumes:
+  postgres_data:

@@ -1,0 +1,6 @@
+<svg width="1200" height="720" viewBox="0 0 1200 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Before house placeholder">
+  <rect width="1200" height="720" fill="#94a3b8"/>
+  <rect x="140" y="320" width="920" height="260" fill="#64748b"/>
+  <polygon points="600,150 1030,330 170,330" fill="#475569"/>
+  <text x="170" y="660" fill="#e2e8f0" font-size="52" font-family="Arial, sans-serif">Before</text>
+</svg>
